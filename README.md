@@ -174,7 +174,7 @@ To Do this, click on the 3 line icon next to the **Google Cloud Platform** butto
 
 To have a static IP address, change **Type** from **Ephemeral** to **Static**. Enter your prefered name for your static IP, ours is `cs231n-ip` (see screenshot below). And click on Reserve. 
 
-**NOTE:** At the end of CS 231N when you don't need your instance anymore, **release the static IP address because Google charges a small fee for unused static IPs** (according to [this page](https://jeffdelaney.me/blog/running-jupyter-notebook-google-cloud-platform/)).
+**NOTE:** At the end of CS 331B when you don't need your instance anymore, **release the static IP address because Google charges a small fee for unused static IPs** (according to [this page](https://jeffdelaney.me/blog/running-jupyter-notebook-google-cloud-platform/)).
 
 ![](.img/networking-external-ip-naming.png)
 
@@ -205,7 +205,7 @@ gcloud compute --project "<YOUR_PROJECT_ID>" ssh --zone "us-west1-b" "<YOUR_VM_N
 
 After you SSH into the VM for the first time, you need to run a few commands in your home directory. You will be asked to set up a password for your Jupyter notebook.
 ```bash
-git clone https://github.com/cs231n/gcloud.git
+git clone https://github.com/ChengshuLi/gcloud.git
 cd gcloud/
 chmod +x ./setup.sh
 ./setup.sh
@@ -248,18 +248,18 @@ gcloud compute scp <user>@<instance-name>:/path/to/file.zip /local/path
 For example, to download files from our instance to the current folder:
 
 ```
-gcloud compute scp tonystark@cs231n:/home/shared/file.zip .
+gcloud compute scp tonystark@cs331b:/home/shared/file.zip .
 ```
 
 The transfer works in both directions. To upload a file to your instance:
 
 ```
-gcloud compute scp /my/local/file tonystark@cs231n:/home/shared/
+gcloud compute scp /my/local/file tonystark@cs331b:/home/shared/
 ```
 
 If you would like to transfer an entire folder, you will need to add a resursive flag: 
 ```
-gcloud compute scp --recursive /my/local/folder tonystark@cs231n:/home/shared/
+gcloud compute scp --recursive /my/local/folder tonystark@cs331b:/home/shared/
 ```
 
 ### Other Tips
