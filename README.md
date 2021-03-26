@@ -9,9 +9,7 @@
 2. [Create and Configure Your Account](#create-and-configure-your-account)
     1. [Sign Up GCP for the First Time](#sign-up-gcp-for-the-first-time)
     2. [Configure Your Project](#configure-your-project)
-3. [Claim CS231N GCP credits](#claim-cs231n-gcp-credits)
-4. [Request an Increase in GPU Quota](#request-an-increase-in-gpu-quota)  
-    1. [Why don't I See Any GPU-related Quota](#why-dont-i-see-any-gpu-related-quotas)
+3. [Request an Increase in GPU Quota](#request-an-increase-in-gpu-quota)  
 5. [Set Up Google Cloud VM Image](#set-up-google-cloud-vm-image)
     1. [Customize VM Hardware](#customize-vm-hardware)
     2. [Configure Networking](#configure-networking)
@@ -78,27 +76,11 @@ Please try to use the resources judiciously.
 ![](/.img/add-people.png)
 
 3. **Upgrade your account** in order to use GPUs following this [instruction](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade). Otherwise [Google Cloud Free Tier](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade) does not come with GPU support or quota.
-![](/.img/upgrade-1.png)
-![](/.img/upgrade-2.png)
 
-## Claim CS231N GCP credits 
+Go to **Billing** and click "Upgrade" on the "Credits" section at the bottom right corner.
+An upgraded account should look like this.
+![](/.img/upgrade-account.png)
 
-NOTE: You should have created and logged in your GCP account registered with your personal gmail account by now. 
-
-1. We will release the $50 GCP credits Google form on Piazza. After your complete the form, you will see a link to Google Cloud Education Grants page. **It requires your Stanford email to receive the credits**. (These credits can be **applied to your GCP account registered with Personal GMail**. )
-![](/.img/get-coupon.png)
-
-2. After submission, you should receive a email from GCP with a link to confirm your email address. Click the link to verify your Stanford email.
-![](/.img/email-confirmation.png)
-
-3. You will soon receive another email from GCP with a link that applys the $50 credits to your account. After that the website will jump to your [Billing](https://console.cloud.google.com/billing) page where you should see your have linked to CS231N billing account with $50 free credits. 
-![](/.img/accept-credits.png)
-![](/.img/billing-page.png)
-
-4. Switching billing accounts from Free Tier credits to CS231N credits
-Google Cloud does not support combining credits. You will need to switch billing account if you want to use 2 sources of gcloud credits. 
-
-i.e. You can use up the $300 free credits first. Then switch to the CS231N billing account referring to this [GCloud documentation](https://cloud.google.com/billing/docs/how-to/modify-project#change_the_billing_account_for_a_project).
 
 ## Request an Increase in GPU Quota
 
@@ -106,32 +88,18 @@ Your account typically does not come with GPU quota. You have to explicitly requ
 
 **Please request the quota increase ASAP**, because they will take up between couple minutes to a week to process!  If you don't have GPU quota, you will have to create a CPU-only VM first and create another GPU VM later, explained in the next section.
 
-**Notice there are two kinds of GPU quota you will need to adjust.** 
+1. Enable VM instances. Go to **Compute Engine** > **VM instances** and click "Enable". Then you should see something like this.
+![](.img/vm-instances.png)
 
-1. You should first change your quota of **GPU (all regions)**.  Filter the **Metric** to be **GPU (all regions)**, **Location**  to be **Global**. 
-![](.img/gpu-all-regions.png)
+2. Change your quota of **GPUs (all regions)**. Search "GPU" in the search bar and scroll all the way down. You should see **GPUs (all regions)** and click **ALL QUOTAS".
+![](.img/quota-gpu-search.png)
+![](.img/quota-gpu-global.png)
 
- Wait until GCP send you a second email (first email is just to notify they receive the request) that looks like this. It could take couple minutes to couple days for them to approve.
+3. Select the quota with **Location: Global** and click **EDIT QUOTAS**. Then put in "1" in the "New limit" text box and proceed to "Next".
+![](.img/quota-gpu-request.png)
+
+4. Wait until GCP send you the second email (the first email is just to notify they receive the request) that looks like this. It could take couple minutes to couple days for them to approve.
 ![](.img/gpu-quota-approved.png) 
-
-2. You should adjust your region-specific GPU (usually it is already 1 by default) if you want more than 1 GPU in your VM instance for multi-GPU training. You can filter by the **Metric** and **Location** to set the type of GPU and your region.
-![](.img/gpu-region.png)
-
-### Why don't I See Any GPU-related Quota
-
-1. First, make sure you first upgrade your free tier account to full account following this [instruction](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade).
-
-2. If you just registered a Google Cloud account, GCP can be slow on setting up its Compute Engine API services (this is the service that provides GPU access, so the GPU quota won't show up before it is ready). 
-
-One way I found that can make Compute Engine API setup faster is by visiting the [VM instance page](https://console.cloud.google.com/compute/) by clicking  **Compute Engine** > **VM instances**
-
-If you see that Compute Engine is not ready yet, wait for couple minutes until you see something like this screenshot below. The GPU-related Quota should now show up in  **IAM Admin** > **Quotas**. 
-![](.img/vm-instance-ready.png)
-
-3. For region-specific GPUs: Check that you have a default zone and region set under **Compute Engine** > **Settings** > **Region** / **Zone**. Some zones do not have certain GPU resources. Check [pricing and spec for GCP GPUs](https://cloud.google.com/compute/gpus-pricing) to find the availability of GPU resources. 
-
-
-More instructions at [General quota instructions](https://cloud.google.com/compute/quotas#requesting_additional_quota) and [Step-by-step GPU-specific walk-through](https://stackoverflow.com/questions/45227064/how-to-request-gpu-quota-increase-in-google-cloud) (all answers in the link are useful)
 
 
 ## Set Up Google Cloud VM Image
