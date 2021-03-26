@@ -77,7 +77,7 @@ Please try to use the resources judiciously.
 
 3. **Upgrade your account** in order to use GPUs following this [instruction](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade). Otherwise [Google Cloud Free Tier](https://cloud.google.com/free/docs/gcp-free-tier#how-to-upgrade) does not come with GPU support or quota.
 
-Go to **Billing** and click "Upgrade" on the "Credits" section at the bottom right corner.
+4. Go to **Billing** and click "Upgrade" on the "Credits" section at the bottom right corner.
 An upgraded account should look like this.
 ![](/.img/upgrade-account.png)
 
