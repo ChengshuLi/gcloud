@@ -88,16 +88,17 @@ Your account typically does not come with GPU quota. You have to explicitly requ
 
 **Please request the quota increase ASAP**, because they will take up between couple minutes to a week to process!  If you don't have GPU quota, you will have to create a CPU-only VM first and create another GPU VM later, explained in the next section.
 
-**Notice there are two kinds of GPU quota you will need to adjust.** 
-
 1. Enable VM instances. Go to **Compute Engine** > **VM instances** and click "Enable". Then you should see something like this.
-![](.img/vm-instance-ready.png)
+![](.img/vm-instances.png)
 
 2. Change your quota of **GPUs (all regions)**. Search "GPU" in the search bar and scroll all the way down. You should see **GPUs (all regions)** and click **ALL QUOTAS".
 ![](.img/quota-gpu-search.png)
-![](.img/quota-gpu-globalh.png)
+![](.img/quota-gpu-global.png)
 
- Wait until GCP send you a second email (first email is just to notify they receive the request) that looks like this. It could take couple minutes to couple days for them to approve.
+3. Select the quota with **Location: Global** and click **EDIT QUOTAS**. Then put in "1" in the "New limit" text box and proceed to "Next".
+![](.img/quota-gpu-request.png)
+
+4. Wait until GCP send you the second email (the first email is just to notify they receive the request) that looks like this. It could take couple minutes to couple days for them to approve.
 ![](.img/gpu-quota-approved.png) 
 
 
