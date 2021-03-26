@@ -91,7 +91,7 @@ Your account typically does not come with GPU quota. You have to explicitly requ
 1. Enable VM instances. Go to **Compute Engine** > **VM instances** and click "Enable". Then you should see something like this.
 ![](.img/vm-instances.png)
 
-2. Change your quota of **GPUs (all regions)**. Search "GPU" in the search bar and scroll all the way down. You should see **GPUs (all regions)** and click **ALL QUOTAS".
+2. Change your quota of **GPUs (all regions)**. Search "GPU" in the search bar and scroll all the way down. You should see **GPUs (all regions)** and click **ALL QUOTAS**.
 ![](.img/quota-gpu-search.png)
 ![](.img/quota-gpu-global.png)
 
