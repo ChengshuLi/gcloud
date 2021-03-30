@@ -167,7 +167,7 @@ To Do this, click on the 3 line icon next to the **Google Cloud Platform** butto
 
 ![](.img/networking-external-ip.png)
 
-To have a static IP address, change **Type** from **Ephemeral** to **Static**. Enter your prefered name for your static IP, ours is `cs231n-ip` (see screenshot below). And click on Reserve. 
+To have a static IP address, change **Type** from **Ephemeral** to **Static**. Enter your prefered name for your static IP, ours is `cs331b-ip` (see screenshot below). And click on Reserve. 
 
 **NOTE:** At the end of CS 331B when you don't need your instance anymore, **release the static IP address because Google charges a small fee for unused static IPs** (according to [this page](https://jeffdelaney.me/blog/running-jupyter-notebook-google-cloud-platform/)).
 
