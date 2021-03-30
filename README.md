@@ -144,24 +144,16 @@ Wait until the deployment is finished. You should see a running VM with a green 
 
 We need to tweak a few more settings to enable remote access to Jupyter notebooks.
 
-1. You must stop the instance first.
-2. Go to your VM instance's details at **Compute Engine** > **VM instances** > [click on instance name]. Click "edit" on your VM's page.
-3. Select "Allow HTTP traffic" and "Allow HTTPS traffic".
-4. Scroll all the way down and click the blue button "save".
-5. Go to [Firewall config page](https://console.cloud.google.com/networking/firewalls).
-6. Click "CREATE FIREWALL RULE"
-7. Give it an arbitrary name, such as `cs231n`.
-8. In `Targets` field, select `All instances in the network`.
-9. In `Source IP ranges`, enter `0.0.0.0/0`.
-10. In `Protocols and ports` field, select "Specified protocols and ports". Then check `tcp` and enter `7000-9000`.
-11. Click the blue button `Create`.
-12. Restart your instance on the Compute Engine page.
+1. Go to [Firewall config page](https://console.cloud.google.com/networking/firewalls).
+2. Click "CREATE FIREWALL RULE"
+3. Give it an arbitrary name, such as `cs331b`.
+4. In `Targets` field, select `All instances in the network`.
+5. In `Source IP ranges`, enter `0.0.0.0/0`.
+6. In `Protocols and ports` field, select "Specified protocols and ports". Then check `tcp` and enter `7000-9000`.
+7. Click the blue button `Create`.
+8. Restart your instance on the Compute Engine page.
 
 Your configuration sheets should look similar to below:
-
-<img src=".img/network.png" width="70%">
-
-Firewall Rules:
 
 <img src=".img/firewall.png" width="70%">
 
