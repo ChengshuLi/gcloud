@@ -1,6 +1,6 @@
 # Google Cloud Setup and Tutorial
 
-(Last Update on March 26, 2021)
+(Last Update on March 30, 2021)
 
 
 # Table of contents
