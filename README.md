@@ -14,12 +14,13 @@
     1. [Customize VM Hardware](#customize-vm-hardware)
     2. [Configure Networking](#configure-networking)
 6. [Access Your Newly created VM](#access-your-newly-created-vm)
-    1. [Install gcloud command-line Tools](#install-gcloud-command-line-tools)
-    2. [First-time Setup Script](#first-time-setup-script)
+    1. [Install gcloud Command Line and Connect To Your VM Instance](#install-gcloud-command-line-and-connect-to-your-vm-instance)
+    2. [Verification](#verification)
 7. [Remote Server Development](#remote-server-development)
     1. [Using Jupyter Notebook with Google Compute Engine](#using-jupyter-notebook-with-google-compute-engine)
-    2. [Transferring Files From Your Instance To Your Computer](#transferring-files-from-your-instance-to-your-computer)
-    3. [Other Tips](#other-tips)
+    2. [Using Tensorboard with Google Compute Engine](#using-tensorboard-with-google-compute-engine)
+    3. [Transferring Files From Your Instance To Your Computer](#transferring-files-from-your-instance-to-your-computer)
+    4. [Other Tips](#other-tips)
     
 
 ## Overview 
@@ -69,7 +70,7 @@ Please try to use the resources judiciously.
 
 ### Configure Your Project 
 
-1. On the main project dashboard, you can change the name of your project by clicking **Go to project settings**. 
+1. On the main project dashboard, you can change the name of your project by clicking **Go to project settings**. Take a note of your project ID.
 ![](.img/dashboard-screen.png)
 
 2. To add project collaborators, click **ADD PEOPLE TO THIS PROJECT**. Add their email and make their role owners. 
@@ -107,7 +108,7 @@ Your account typically does not come with GPU quota. You have to explicitly requ
 ### Customize VM Hardware 
 
 1. Go to [Create Instance](https://console.cloud.google.com/compute/instancesAdd). You will see a page where you can customize specifications to create a VM instance.
-2. Fill in `Name` field with your preferred VM name.
+2. Fill in `Name` field with your preferred VM name, e.g. `cs331b`.
 3. In `Machine configuration` part, Customize following the screenshot below.
 4. Choose your desired number of CPUs and memory. If you need to run iGibson, 8 vCPUs, 32 GB memory would be the minimum. 
 5. Set `Number of GPUs` to 1 since we will need GPU to run iGibson.
@@ -182,47 +183,33 @@ Take note of your Static IP address (circled on the screenshot below). We use 35
 
 Now that you have created your virtual GCE, you want to be able to connect to it from your computer. The rest of this tutorial goes over how to do that using the command line. 
 
-### Install gcloud command-line Tools
-To access [gcloud commands](https://cloud.google.com/sdk/gcloud/reference) in your local terminal, install [Google Cloud SDK](https://cloud.google.com/sdk/docs) that is appropriate for your platform and follow their instructions. 
+### Install gcloud command-line and connect to your VM instance
+1. Install [Google Cloud SDK](https://cloud.google.com/sdk/docs/install).
+2. Log in using `gcloud auth login`. It will ask you to copy/paste a link to your browser. Authenticate using the same gmail account that you used for this tutorial and then copy the code and paste it in your terminal after the prompt `Enter verification code:`
+3. Set the current project using `gcloud config set project <PROJECT_ID>`
+4. Connect to your VM instance using `gcloud compute ssh <INSTANCE_NAME>`
+5. If you connect for the first time, you will be asked "Would you like to install the Nvidia driver?". Input `y`. It should take 1 min or so. 
+6. Run the setup script. This is optional unless you want to use jupyter notebook.
 
-If `gcloud` command is not in your system path after installation, you can also reference it by its full path `/<DIRECTORY-WHERE-GOOGLE-CLOUD-IS-INSTALLED>/bin/gcloud`. See [this page](https://cloud.google.com/compute/docs/instances/connecting-to-instance "Title") for more detailed instructions.
-
-To ssh into your VM, go to your VM instance details page by clicking on its name. Start the VM instance first. Once it has a green check mark on, click on the drop-down arrow and select `View gcloud command` instead to retrieve the terminal command. It should look like
-
-```bash
-gcloud compute --project "<YOUR_PROJECT_ID>" ssh --zone "us-west1-b" "<YOUR_VM_NAME>"
-```
-
-![](.img/connect-to-vm.png)
-
-
-### First-time Setup Script
-
-After you SSH into the VM for the first time, you need to run a few commands in your home directory. You will be asked to set up a password for your Jupyter notebook.
 ```bash
 git clone https://github.com/ChengshuLi/gcloud.git
 cd gcloud/
-chmod +x ./setup.sh
+chmod u+x setup.sh
 ./setup.sh
 ```
 
-#### Verification
+### Verification
 
 If you have GPU enabled, you should be able to:
 
 * run `nvidia-smi` and see the list of attached GPUs and their usage statistics. Run `watch nvidia-smi` to monitor your GPU usage in real time.
-* inside the `gcloud/` folder, run `python verify_gpu.py`. If your GPU is attached and CUDA is correctly installed, you shouldn't see any error.
-* If you want to use Tensorflow 2.1, run `python test_tf.py`. The script will show you the installed Tensorflow version (2.1.0) and then run a sample MNIST training. You should see around 97% accuracy at the end.  
-
-
+* first `pip install torch` and then inside the `gcloud/` folder, run `python verify_gpu.py`. If your GPU is attached and CUDA is correctly installed, you shouldn't see any error.
 
 ## Remote Server Development
 
 ### Using Jupyter Notebook with Google Compute Engine 
-If you wish, you can use Jupyter Notebook to experiment in your projects. Below, we discuss how to run Jupyter Notebook from your GCE instance and connect to it with your local browser.
 
-After you ssh into your VM using the prior instructions, run Jupyter notebook from the folder with your assignment files.
-
+Start Jupyter Notebooks
 ```
 jupyter notebook
 ```
@@ -231,6 +218,12 @@ The default port is `8888`, specified in `~/.jupyter/jupyter_notebook_config.py`
 
 You can connect to your Jupyter session from your personal laptop. Check the external ip address of your instance, say it is `35.185.240.182`. Open any browser and visit `35.185.240.182:8888`. The login password is the one you set with the setup script above.
 
+### Using Tensorboard with Google Compute Engine
+Start Tensorboard
+```
+tensorboard --logdir . --port 8000 --bind_all
+```
+Visit `<external_ip>:8000` on your browser to access the Tensorboard.
 
 ### Transferring Files From Your Instance To Your Computer
 
