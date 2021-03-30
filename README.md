@@ -106,27 +106,30 @@ Your account typically does not come with GPU quota. You have to explicitly requ
 
 ### Customize VM Hardware 
 
-1. Go to [this gcloud marketplace](https://console.cloud.google.com/marketplace/config/click-to-deploy-images/tensorflow). You may (or may not) be taken to a page where you have to click on "Launch", and then you should see a configuration sheet with the title "New Deep Learning VM deployment".
-2. Fill in `Deployment name` field with your preferred VM name.
-3. In `Machine type` box, click `Customize`.
-4. Choose your desired number of CPUs and memory. 
-5. Set `Number of GPUs` to `None` if you don't need GPUs.
+1. Go to [Create Instance](https://console.cloud.google.com/compute/instancesAdd). You will see a page where you can customize specifications to create a VM instance.
+2. Fill in `Name` field with your preferred VM name.
+3. In `Machine configuration` part, Customize following the screenshot below.
+4. Choose your desired number of CPUs and memory. If you need to run iGibson, 8 vCPUs, 32 GB memory would be the minimum. 
+5. Set `Number of GPUs` to 1 since we will need GPU to run iGibson.
 6. For `GPU type`, `NVIDIA Tesla K80` is typically enough. `P100` and `V100` are way more expensive (check the price on the right), but also faster and has larger memory. Check [pricing and spec for GCP GPUs](https://cloud.google.com/compute/gpus-pricing). 
     **GPU drivers and CUDA will be automatically installed _only if_ you select at least 1 GPU**.
     
     Alternatively, you can choose *None* if you are not in need of GPU resources yet (you can always add on later) to save cost, and in this case GPU drivers and CUDA will not be installed.
-5. In `Frameworks` field, change `TensorFlow Enterpris 2.1 (CUDA 10.1)` to `PyTorch 1.4 + fast.ai (CUDA 10.0)`. If you wish to use Tensorflow, our setup script will help you set it up later in this tutorial.
-6. Check the box `Install NVIDIA GPU driver automatically on first startup?`.
-7. Check the box `Enable access to JupyterLab via URL instead of SSH. (Beta)`.
-8. Leave all other options as default.
-9. Click the blue botton `Deploy` at the end of the page. It will **Automatically Start your Instance**, so if you don't need to use it now, **Stop it Immediately**.
+5. In `Boot disk` field, change to `Public images -> Deep Learning on Linux -> Deep Learning Image: Base m66 CUDA 11.0`. Select at least 100GB Memory.
+6. Check the box `Allow HTTP traffic` and `Allow HTTP traffic` since we will be using tensorboard and jupyter notebook.
+7. Leave all other options as default.
+8. Click the blue botton `Create` at the end of the page. It will **Automatically Start your Instance**, so if you don't need to use it now, **Stop it Immediately**.
 
 
 Your configuration sheet should look similar to below image. Follow exactly the same configuration for the ones with red boxes. For configurations with orange boxes, you can adjust it based on your project need as discussed below. 
 
 Pay attention to the monthly price, make sure you claim only necessary HW resources, so that you can use your GCP instance for longer. 
 **Once you run out of credits, the VM instance will be shut down automatically and you might lose unsaved data and models.** If you are almost running out of credits, contact the course staff.
-![](.img/vm-config.png)
+
+![](.img/vm-config1.png)
+![](.img/vm-config2.png)
+![](.img/vm-config3.png)
+
 
 #### Change Configuration on Already Created VM Instances
 1. You can always change number of CPUs, number of GPUs, CPU memory, and GPU type **after your VM has been created**. 
